@@ -1,21 +1,18 @@
 const express = require('express');
 const morgan = require('morgan');
-const mongoose = require('mongoose');
 const router = require('./routes');
-
+const config = require('./config');
+const dbConn = require('./config/db');
 const isProduction = process.env.NODE_ENV === 'production';
 
 // Create global express app object
 const app = express();
 
+// connect to DB
+dbConn();
+
 // configure logging
 app.use(morgan('dev'));
-
-mongoose.connect('mongodb://localhost/test');
-
-console.log(app.get('env'));    
-
-const port = process.env.PORT || 3000;
 
 app.use('/', router);
 
@@ -29,27 +26,27 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (!isProduction) {
-    app.use(function(err, req, res, next) {
-      console.log(err.stack);  
-      res.status(err.status || 500);  
-      res.json({'errors': {
-        message: err.message,
-        error: err
-      }});
+    app.use((err, req, res, next) => {
+        console.log(err.stack);  
+        res.status(err.status || 500);  
+        res.json({'errors': {
+            message: err.message,
+            error: err
+        }});
     });
   }
   
-  // production error handler
-  // no stacktraces leaked to user
-  app.use(function(err, req, res, next) {
+// production error handler
+// no stacktraces leaked to user
+app.use((err, req, res, next) => {
     res.status(err.status || 500);
     res.json({'errors': {
-      message: err.message,
-      error: {}
+        message: err.message,
+        error: {}
     }});
-  });
+});
 
-app.listen(port, () => {
-    console.log('Example app listening on port =', port);
+app.listen(config.port, () => {
+    console.log('App listening on port =', config.port);
 });
   
