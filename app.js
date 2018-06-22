@@ -3,7 +3,6 @@ const morgan = require('morgan');
 const router = require('./routes');
 const config = require('./config');
 const dbConn = require('./config/db');
-const isProduction = process.env.NODE_ENV === 'production';
 
 // Create global express app object
 const app = express();
@@ -14,6 +13,7 @@ dbConn();
 // configure logging
 app.use(morgan('dev'));
 
+// bind routes
 app.use('/', router);
 
 /// catch 404 and forward to error handler
@@ -25,7 +25,7 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-if (!isProduction) {
+if (!config.isProduction) {
     app.use((err, req, res, next) => {
         console.log(err.stack);  
         res.status(err.status || 500);  
