@@ -5,12 +5,15 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon", 
-    "test": "test"
+    "dev": "nodemon",
+    "test": "test",
+    "mongo:start": "docker run -d -p 27017:27017 --name realworld-mongo mongo:3.2",
+    "mongo:stop": "docker stop realworld-mongo && docker rm realworld-mongo"
   },
   "author": "Lestex",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "mongoose": "^5.1.6"
   }
 }
