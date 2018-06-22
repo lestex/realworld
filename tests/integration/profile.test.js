@@ -9,6 +9,7 @@ describe('/api/profiles', () => {
         it('should return OK - 200', async () => {
             const res = await request(server).get('/api/profiles');
             expect(res.status).toBe(200);
+            //expect(res.body).toMatch(/profiles/);
         });
     })
 
@@ -16,6 +17,7 @@ describe('/api/profiles', () => {
         it('should return OK - 200', async () => {
             const res = await request(server).get('/api/profiles/me');
             expect(res.status).toBe(200);
+            //expect(res.body).toMatch(/me/);
         });
     })
 });
