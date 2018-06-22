@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 const config = require('../config');
 
-dbUrl = 'mongodb://localhost/' + config.dbName;
-
 module.exports = function() {
-    mongoose.connect(dbUrl).
-        then(() => console.log('connected to', dbUrl));
+    mongoose.connect(config.dbUrl).
+        then(() => console.log(`Connected to ${config.dbUrl}...`));
 };
