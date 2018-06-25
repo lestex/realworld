@@ -1,0 +1,4 @@
+secret: 'dev_secret'
+dbUrl: 'mongodb://localhost/realworld_test'
+port: 3000
+isProduction: false

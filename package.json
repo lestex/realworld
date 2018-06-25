@@ -13,6 +13,7 @@
   "author": "Lestex",
   "license": "MIT",
   "dependencies": {
+    "config": "^1.30.0",
     "express": "^4.16.3",
     "mongoose": "^5.1.6",
     "morgan": "^1.9.0"

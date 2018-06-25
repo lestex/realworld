@@ -1,14 +1,15 @@
 const express = require('express');
 const morgan = require('morgan');
 const router = require('./routes');
-const config = require('./config');
-const dbConn = require('./config/db');
+const config = require('config');
+const mongoose = require('mongoose');
 
 // Create global express app object
 const app = express();
 
 // connect to DB
-dbConn();
+mongoose.connect(config.dbUrl)
+    .then(() => console.log(`Connected to ${config.dbUrl}...`));
 
 // configure logging
 app.use(morgan('dev'));
