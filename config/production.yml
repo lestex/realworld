@@ -1,1 +1,2 @@
 dbUrl: 'mongodb://localhost/realworld'
+isProdustion: true
