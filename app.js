@@ -9,7 +9,7 @@ const appDebugger = require('debug')('app:debugger');
 const app = express();
 
 // connect to DB
-if(config.isProduction){
+if (config.isProduction) {
     mongoose.connect(config.dbUrl)
         .then(() => appDebugger(`Connected to ${config.dbUrl}...`));
 } else {
@@ -34,7 +34,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (!config.isProduction) {
-    app.use((err, req, res, next) => {
+    app.use((err, req, res) => {
         appDebugger(err.stack);  
         res.status(err.status || 500);  
         res.json({'errors': {
@@ -46,7 +46,7 @@ if (!config.isProduction) {
   
 // production error handler
 // no stacktraces leaked to user
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
     res.status(err.status || 500);
     res.json({'errors': {
         message: err.message,

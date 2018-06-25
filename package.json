@@ -8,7 +8,8 @@
     "dev": "nodemon",
     "test": "jest --watchAll",
     "mongo:start": "docker run -d -p 27017:27017 --name realworld-mongo mongo:3.2",
-    "mongo:stop": "docker stop realworld-mongo && docker rm realworld-mongo"
+    "mongo:stop": "docker stop realworld-mongo && docker rm realworld-mongo",
+    "lint": "eslint app.js routes/**/**.js models/**"
   },
   "author": "Lestex",
   "license": "MIT",
