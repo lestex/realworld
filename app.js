@@ -3,14 +3,10 @@ const morgan = require('morgan');
 const router = require('./routes');
 const config = require('config');
 const mongoose = require('mongoose');
-const appDebugger = require('debug')('app:debugger');
-const winston = require('winston');
+const logger = require('./config/logger');
 
 // Create global express app object
 const app = express();
-const logger = winston.createLogger({
-    transports: [new winston.transports.Console()]
-  });
 
 // connect to DB
 if (config.isProduction) {
