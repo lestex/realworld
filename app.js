@@ -7,6 +7,7 @@ const logger = require('./config/logger');
 
 // Create global express app object
 const app = express();
+app.use(express.json());
 
 // connect to DB
 if (config.isProduction) {
