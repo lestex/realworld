@@ -4,17 +4,21 @@ const router = require('./routes');
 const config = require('config');
 const mongoose = require('mongoose');
 const appDebugger = require('debug')('app:debugger');
+const winston = require('winston');
 
 // Create global express app object
 const app = express();
+const logger = winston.createLogger({
+    transports: [new winston.transports.Console()]
+  });
 
 // connect to DB
 if (config.isProduction) {
     mongoose.connect(config.dbUrl)
-        .then(() => appDebugger(`Connected to ${config.dbUrl}...`));
+        .then(() => logger.info(`Connected to ${config.dbUrl}...`));
 } else {
     mongoose.connect(config.dbUrl)
-        .then(() => appDebugger(`Connected to ${config.dbUrl}...`));
+        .then(() => logger.info(`Connected to ${config.dbUrl}...`));
     mongoose.set('debug', true);
 }
 
@@ -35,7 +39,7 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (!config.isProduction) {
     app.use((err, req, res) => {
-        appDebugger(err.stack);  
+        logger.info(err.stack);  
         res.status(err.status || 500);  
         res.json({'errors': {
             message: err.message,
@@ -55,7 +59,7 @@ app.use((err, req, res) => {
 });
 
 const server = app.listen(config.port, () => {
-    appDebugger('App listening on port =', config.port);
+    logger.info('App listening on port =', config.port);
 });
 
 module.exports = server;
