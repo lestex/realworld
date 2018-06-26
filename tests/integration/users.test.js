@@ -9,6 +9,8 @@ describe('/api/users', () => {
         it('should return OK - 200', async () => {
             const res = await request(server).get('/api/user');
             expect(res.status).toBe(200);
+            expect(res.body.response).toContain('user');
+            expect(res.body.response).toMatch(/user/);
         });
     })
 });

@@ -56,7 +56,7 @@ app.use((err, req, res) => {
 });
 
 const server = app.listen(config.port, () => {
-    logger.info('App listening on port =', config.port);
+    logger.info(`App listening on port: ${config.port}`);
 });
 
 module.exports = server;
