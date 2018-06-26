@@ -7,7 +7,7 @@ router.get('/user', (req, res) => {
 
 // POST to /api/users
 router.post('/users', async (req, res, next) => {
-    let user = new User();
+    const user = new User();
   
     user.username = req.body.user.username;
     user.email = req.body.user.email;
@@ -15,11 +15,11 @@ router.post('/users', async (req, res, next) => {
 
     try {
         const result = await user.save();
+
         return res.json({user: result.toJSON()});        
+    } catch (error) {
+        return next();
     }
-    catch {
-        next();
-    }    
 });
 
 module.exports = router;

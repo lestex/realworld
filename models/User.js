@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 
-let UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     password: String,
     name: String,    
-    email: String
+    image: String,
+    email: String,
+    bio: String
 }, {timestamps: true});
 
 UserSchema.methods.toJSON = function() {
