@@ -43,7 +43,7 @@ if (!config.isProduction) {
             error: err
         }});
     });
-  }
+}
   
 // production error handler
 // no stacktraces leaked to user
