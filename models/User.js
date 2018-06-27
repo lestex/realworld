@@ -7,17 +7,26 @@ const UserSchema = new mongoose.Schema({
     username: {
         type: String,
         lowercase: true,
-        required: [true, "can't be blank"]
+        required: [
+            true,
+            'can\'t be blank'
+        ]
     },
     password: {
         type: String,        
-        required: [true, "can't be blank"]
+        required: [
+            true,
+            'can\'t be blank'
+        ]
     },
     image: String,
     email: {
         type: String,
         lowercase: true,
-        required: [true, "can't be blank"]
+        required: [
+            true,
+            'can\'t be blank'
+        ]
     },
     bio: String
 }, {timestamps: true});
@@ -26,10 +35,11 @@ UserSchema.methods.generateJWT = function() {
     var today = new Date();
     var exp = new Date(today);
     exp.setDate(today.getDate() + 60);
+
     return jwt.sign({
         id: this._id,
         username: this.username,
-        exp: parseInt(exp.getTime() / 1000),
+        exp: parseInt(exp.getTime() / 1000, 10)
     }, config.secret);
 };
 
