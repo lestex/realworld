@@ -18,6 +18,9 @@ UserSchema.methods.toJSON = function() {
 
 const User = mongoose.model('User', UserSchema);
 
+/**
+ * Validates User object.
+ */
 function validateUser(user) {
     const schema = {
       username: Joi.string()

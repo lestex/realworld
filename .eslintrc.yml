@@ -47,7 +47,6 @@ rules:
   func-names:
     - error
     - never
-  func-style: error
   function-paren-newline: error
   generator-star-spacing: error
   global-require: error
@@ -239,7 +238,6 @@ rules:
   unicode-bom:
     - error
     - never
-  valid-jsdoc: error
   vars-on-top: error
   wrap-iife: error
   wrap-regex: error
