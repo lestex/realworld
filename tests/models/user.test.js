@@ -1,14 +1,23 @@
-const User = require('../../models/User');
-
-const validUser = require('../fixtures/user');
+const {validate} = require('../../models/User');
+const {validUser, invalidUser} = require('../fixtures/user');
 
 describe('User', function() {
-    it('should be invalid if username is empty', () => {
-        validUser.save();
-        User.find({ username: validUser.username })
-            .then((user) => {
-                expect(user).toEqual(validUser);
-            });
+    it('user should be valid', () => {
+        const result = validate(validUser);
+        expect(result).toBeTruthy();
+    });
+
+    it('user without username should not be valid', () => {
+        const result = validate(invalidUser);
+        expect(result).toHaveProperty('error');
+    });
+
+    it('user.toJson', () => {
+        const result = validUser.toJSON();
+        resultObj = {email: "email@mail.com", username: "user1"}
+        expect(result).toMatchObject(resultObj);
+        expect(result).toHaveProperty('username');
+        expect(result).toHaveProperty('email');
     });
 });
 

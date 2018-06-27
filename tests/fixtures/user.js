@@ -1,11 +1,18 @@
-const User = require('../../models/User');
+const {User} = require('../../models/User');
 
 const validUser = new User({
     password: "1234567",
-    name: "user1",    
-    image: "http://some.url/image.jpg",
-    email: "email@mail.com",
-    bio: "The bio"
+    username: "user1",    
+    email: "email@mail.com"
 });
 
-module.exports = validUser;
+User.User
+
+const invalidUser = new User({
+    password: "",
+    username: "",    
+    email: "email@mail.com"    
+});
+
+exports.validUser = validUser;
+exports.invalidUser = invalidUser;

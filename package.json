@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon",
-    "test": "jest --watchAll --silent",
+    "test": "jest --watchAll --verbose",
     "mongo:start": "docker run -d -p 27017:27017 --name realworld-mongo mongo:3.2",
     "mongo:stop": "docker stop realworld-mongo && docker rm realworld-mongo",
     "lint": "eslint app.js routes/**/**.js models/**"

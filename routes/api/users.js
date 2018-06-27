@@ -1,9 +1,8 @@
 const router = require('express').Router();
-const Joi = require('joi');
 const User = require('../../models/User');
 
 router.get('/user', (req, res) => {
-    res.send({ response: 'You got to user'});
+    res.send({response: 'You got to user'});
 });
 
 // POST to /api/users for sign up
