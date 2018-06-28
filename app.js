@@ -11,18 +11,15 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 // connect to DB
-if (config.isProduction) {
-    mongoose.connect(config.dbUrl)
-        .then(() => logger.info(`Connected to ${config.dbUrl}...`));
-} else {
-    mongoose.connect(config.dbUrl)
-        .then(() => {
-            if (!config.isTest) {
-                logger.info(`Connected to ${config.dbUrl}...`);
+mongoose.connect(config.dbUrl)
+    .then(() => {
+        if (!config.isTest) {
+            logger.info(`Connected to ${config.dbUrl}...`);
+            if (config.isDevelopment) {
                 mongoose.set('debug', true);
             }
-        });
-}
+        }
+});
 
 // configure logging
 app.use(morgan('dev'));
