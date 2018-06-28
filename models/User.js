@@ -30,8 +30,7 @@ const UserSchema = new mongoose.Schema({
             'can\'t be blank'
         ]
     },
-    bio: String,
-    image: String
+    bio: String
 }, {timestamps: true});
 
 UserSchema.plugin(uniqueValidator, {message: 'already taken.'});

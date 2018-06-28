@@ -1,2 +1,4 @@
+secret: 'test_secret'
 dbUrl: 'mongodb://localhost/realworld_test'
 port: 4000
+isTest: true

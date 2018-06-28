@@ -8,6 +8,7 @@ const logger = require('./config/logger');
 // Create global express app object
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
 // connect to DB
 if (config.isProduction) {
@@ -15,8 +16,12 @@ if (config.isProduction) {
         .then(() => logger.info(`Connected to ${config.dbUrl}...`));
 } else {
     mongoose.connect(config.dbUrl)
-        .then(() => logger.info(`Connected to ${config.dbUrl}...`));
-    mongoose.set('debug', true);
+        .then(() => {
+            if (!config.isTest) {
+                logger.info(`Connected to ${config.dbUrl}...`);
+                mongoose.set('debug', true);
+            }
+        });
 }
 
 // configure logging
@@ -56,7 +61,9 @@ app.use((err, req, res) => {
 });
 
 const server = app.listen(config.port, () => {
-    logger.info(`App listening on port: ${config.port}`);
+    if (!config.isTest) {
+        logger.info(`App listening on port: ${config.port}`);
+    }
 });
 
 module.exports = server;

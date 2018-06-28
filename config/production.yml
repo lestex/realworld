@@ -1,2 +1,4 @@
+secret: 'long_long_production_secret'
 dbUrl: 'mongodb://localhost/realworld'
+port: 3000
 isProdustion: true

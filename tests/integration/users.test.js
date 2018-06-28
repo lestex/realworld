@@ -6,9 +6,11 @@ let server;
 describe('/api/users', () => {
     beforeEach(() => { server = require('../../app'); })
     afterEach(() => { server.close(); })
-    afterAll(() => { User.collection.drop(); })
+    
 
     describe('POST /', () => {
+        afterAll(() => { User.collection.drop(); })
+
         it('should return 422 if username not provided', async () => {
             const invalidUser = { user: {
                 username: "",
@@ -46,12 +48,12 @@ describe('/api/users', () => {
         });
 
         it('should return user with username email and token', async () => {
-            const User = { user: {
+            const user = { user: {
                                 username: "testUser",
                                 email: "user@email.com",
                                 password: "123456"
                          }};
-            const res = await request(server).post('/api/users').send(User);
+            const res = await request(server).post('/api/users').send(user);
             expect(res.status).toBe(200);
             expect(res.body.user).toHaveProperty('username');
             expect(res.body.user).toHaveProperty('email');
@@ -61,6 +63,8 @@ describe('/api/users', () => {
 
     // login 
     describe('POST /login', () => {
+        afterAll(() => { User.collection.drop(); })
+
         it('should return 200 if username and password are correct', async () => {
             const user = new User({
                 username: "testUser",

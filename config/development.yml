@@ -1,2 +1,3 @@
 dbUrl: 'mongodb://localhost/realworld_development'
 port: 3000
+isDevelopment: true
