@@ -49,10 +49,10 @@ describe('/api/users', () => {
 
         it('should return user with username email and token', async () => {
             const user = { user: {
-                                username: "testUser",
-                                email: "user@email.com",
-                                password: "123456"
-                         }};
+                username: "testUser",
+                email: "user@email.com",
+                password: "123456"
+            }};
             const res = await request(server).post('/api/users').send(user);
             expect(res.status).toBe(200);
             expect(res.body.user).toHaveProperty('username');
