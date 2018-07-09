@@ -11,8 +11,8 @@ describe('/api/users', () => {
 
     afterEach( async () => {
         server.close();
-        await User.remove({});
-    })    
+        await User.remove({});        
+    })
 
     describe('POST /', () => {
         it('should return 422 if username not provided', async () => {

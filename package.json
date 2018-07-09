@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon",
-    "test": "jest --watchAll --verbose",
+    "test": "jest --verbose --forceExit",
+    "test-all": "jest --watchAll --verbose",
     "newman": "newman run ./tests/newman/api-tests.newman.json -e ./tests/newman/env-api-tests.json",
     "mongo:start": "docker run -d -p 27017:27017 --name realworld-mongo mongo:3.2",
     "mongo:stop": "docker stop realworld-mongo && docker rm realworld-mongo",
