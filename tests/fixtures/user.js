@@ -1,18 +1,37 @@
 const {User} = require('../../models/User');
 
-const validUser = new User({
-    password: "1234567",
+const validUser = { user: {
     username: "user1",    
-    email: "email@mail.com"
-});
+    email: "email@mail.com",
+    password: "1234567"
+}};
 
-User.User
+const UserNoUsername = { user: {
+    username: "",
+    email: "email@mail.com",
+    password: "12345678"
+}};
 
-const invalidUser = new User({
-    password: "",
-    username: "",    
-    email: "email@mail.com"    
+const UserNoEmail = { user: {
+    username: "testUser",
+    email: "",
+    password: "12345678"
+}};
+
+const UserNoPassword = { user: {
+    username: "user1",    
+    email: "email@mail.com",
+    password: ""
+}};
+
+const validMongoUser = new User({
+    username: "testUser",
+    email: "email@mail.com",
+    password: "123456"
 });
 
 exports.validUser = validUser;
-exports.invalidUser = invalidUser;
+exports.UserNoUsername = UserNoUsername;
+exports.UserNoEmail = UserNoEmail;
+exports.UserNoPassword = UserNoPassword;
+exports.validMongoUser = validMongoUser;

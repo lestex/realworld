@@ -1,58 +1,46 @@
 const request = require('supertest');
-const {User} = require('../../models/User')
+const {User} = require('../../models/User');
+const fixtures = require('../fixtures/user');
 
 let server;
 
 describe('/api/users', () => {
-    beforeEach(() => { server = require('../../app'); })
-    afterEach(() => { server.close(); })
-    
+    beforeEach(() => { 
+        server = require('../../app');
+    })
+
+    afterEach( async () => {
+        server.close();
+        await User.remove({});
+    })    
 
     describe('POST /', () => {
-        afterAll(() => { User.collection.drop(); })
-
         it('should return 422 if username not provided', async () => {
-            const invalidUser = { user: {
-                username: "",
-                email: "user@email.com",
-                password: "123456"
-            }};
-            const res = await request(server).post('/api/users').send(invalidUser);
+            const user = fixtures.UserNoUsername;
+            const res = await request(server).post('/api/users').send(user);
             expect(res.status).toBe(422);            
             expect(res.body).toHaveProperty('errors');
             expect(res.body.errors).toHaveProperty('username');
         });
 
         it('should return 422 if password not provided', async () => {
-            const invalidUser = { user: {
-                username: "testUser",
-                email: "user@email.com",
-                password: ""
-            }};
-            const res = await request(server).post('/api/users').send(invalidUser);
+            const user = fixtures.UserNoPassword;
+            const res = await request(server).post('/api/users').send(user);
             expect(res.status).toBe(422);            
             expect(res.body).toHaveProperty('errors');
             expect(res.body.errors).toHaveProperty('password');
         });
 
         it('should return 422 if email not provided', async () => {
-            const invalidUser = { user: {
-                username: "testUser",
-                email: "",
-                password: "12345678"
-            }};
-            const res = await request(server).post('/api/users').send(invalidUser);
+            const user = fixtures.UserNoEmail;
+            const res = await request(server).post('/api/users').send(user);
             expect(res.status).toBe(422);            
             expect(res.body).toHaveProperty('errors');
             expect(res.body.errors).toHaveProperty('email');
         });
 
         it('should return user with username email and token', async () => {
-            const user = { user: {
-                username: "testUser",
-                email: "user@email.com",
-                password: "123456"
-            }};
+            const user = fixtures.validUser;
             const res = await request(server).post('/api/users').send(user);
             expect(res.status).toBe(200);
             expect(res.body.user).toHaveProperty('username');
@@ -66,17 +54,9 @@ describe('/api/users', () => {
         afterAll(() => { User.collection.drop(); })
 
         it('should return 200 if username and password are correct', async () => {
-            const user = new User({
-                username: "testUser",
-                email: "user@email.com",
-                password: "123456"
-            });
+            const user = fixtures.validMongoUser;
             user.save();
-            const apiUser = { user: {
-                username: "testUser",
-                email: "user@email.com",
-                password: "123456"
-            }};
+            const apiUser = fixtures.validUser;
             const res = await request(server).post('/api/users/login').send(apiUser);
             expect(res.status).toBe(200);
         });
