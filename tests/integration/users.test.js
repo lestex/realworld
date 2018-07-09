@@ -51,8 +51,6 @@ describe('/api/users', () => {
 
     // login 
     describe('POST /login', () => {
-        afterAll(() => { User.collection.drop(); })
-
         it('should return 200 if username and password are correct', async () => {
             const user = fixtures.validMongoUser;
             user.save();
