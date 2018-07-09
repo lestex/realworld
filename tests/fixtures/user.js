@@ -30,8 +30,10 @@ const validMongoUser = new User({
     password: "123456"
 });
 
-exports.validUser = validUser;
-exports.UserNoUsername = UserNoUsername;
-exports.UserNoEmail = UserNoEmail;
-exports.UserNoPassword = UserNoPassword;
-exports.validMongoUser = validMongoUser;
+module.exports = {
+    validUser,
+    UserNoUsername,
+    UserNoEmail,
+    UserNoPassword,
+    validMongoUser
+};
