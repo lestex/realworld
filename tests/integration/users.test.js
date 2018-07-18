@@ -10,7 +10,7 @@ describe('/api/users', () => {
     })
 
     afterEach( async () => {
-        server.close();
+        await server.close();
         await User.remove({});        
     })
 

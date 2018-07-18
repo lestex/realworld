@@ -8,7 +8,7 @@ describe('/api/profiles', () => {
     })
 
     afterEach( async () => {
-        server.close();        
+        await server.close();        
     })
 
     it('GET / should return 200', async () => {
